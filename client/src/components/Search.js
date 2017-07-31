@@ -19,18 +19,19 @@ class Search extends Component {
   onChange(e)
   {
     if(e.target.value ===""){
-      this.props.fetchData({firstName: "*"})
+      this.props.fetchData({name: "*"})
     }
     else {
-      this.props.fetchData({firstName: e.target.value})
+      this.props.fetchData({name: e.target.value})
     }
   }
 
-  onClear(e)
+  onClear()
   {
-    let searchInput = ReactDOM.findDOMNode(this.refs.searchInput)
-    searchInput.value=""
-    this.props.fetchData({firstName: "*"})
+    // let searchInput = ReactDOM.findDOMNode(this.refs.searchInput)
+    // searchInput.value =""
+    this.searchInput.value = ""
+    this.props.fetchData({name: "*"})
 
   }
 
@@ -51,8 +52,8 @@ class Search extends Component {
           <Form horizontal onSubmit={this.onSubmit}>
           <FormGroup controlId="formInlineEmail">
              <Col   smOffset={3} sm={4}>
-              <FormControl
-               ref="searchInput"
+              <input
+               ref={(input) => this.searchInput = input}
                type="text"
                placeholder="First Name"
                onChange={this.onChange}
@@ -84,7 +85,8 @@ class Search extends Component {
           <Form horizontal onSubmit={this.onSubmit}>
           <FormGroup controlId="formInlineEmail">
              <Col   smOffset={3} sm={4}>
-              <FormControl
+              <input
+              ref={(input) => this.searchInput = input}
               type="text"
               placeholder="First Name"
               onChange={this.onChange}
@@ -103,8 +105,8 @@ class Search extends Component {
       <Row className="show-grid">
         <Col smOffset={1} sm={10}>
         <BootstrapTable data={ this.props.searchData } search={ false }>
-        <TableHeaderColumn dataField='first_name'>First Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='last_name'isKey={ true } >Last Name</TableHeaderColumn>
+        <TableHeaderColumn dataField='name'>Name</TableHeaderColumn>
+        <TableHeaderColumn dataField='desc'isKey={ true } >Desc</TableHeaderColumn>
         </BootstrapTable>
         </Col>
       </Row>
@@ -136,7 +138,7 @@ function mapStatetoProps(state){
 
 function mapDispatchToProps(dispatch){
   return {
-    fetchData: firstName => dispatch({type: 'FETCH_SEARCH_DATA', payload:firstName}),
+    fetchData: name => dispatch({type: 'FETCH_SEARCH_DATA', payload:name}),
   }
 }
 

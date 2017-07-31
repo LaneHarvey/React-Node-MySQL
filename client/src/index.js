@@ -31,7 +31,7 @@ const store = createStore(
 sagaMiddleware.run(watchFetchSearchData)
 
 //fetch initial data
-store.dispatch({type: 'FETCH_SEARCH_DATA', payload:{firstName: "*"}})
+store.dispatch({type: 'FETCH_SEARCH_DATA', payload:{name: "*"}})
 
 
 ReactDOM.render(

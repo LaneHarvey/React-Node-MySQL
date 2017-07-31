@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'production') {
 const host = "localhost"
 const user = "root"
 const pswd = "password"
-const dbname = "books"
+const dbname = "users"
 
 // config db ====================================
 const pool = mysql.createPool({
@@ -31,15 +31,15 @@ const pool = mysql.createPool({
 });
 
 const COLUMNS = [
-  'last_name',
-  'first_name'
+  'name',
+  'desc'
 ];
 
-app.get('/api/books', (req, res) => {
+app.get('/api/users', (req, res) => {
 
-  const firstName = req.query.firstName;
+  const name = req.query.name;
 
-  if (!firstName) {
+  if (!name) {
     res.json({
       error: 'Missing required parameters',
     });
@@ -47,10 +47,10 @@ app.get('/api/books', (req, res) => {
   }
 
   let queryString = ``;
-  if(firstName=="*"){
-    queryString = `SELECT * from authors`
+  if(name=="*"){
+    queryString = `SELECT DISTINCT name, items.desc FROM items`
   }else{
-     queryString = `SELECT * from authors WHERE first_name REGEXP '^${firstName}'`
+     queryString = `SELECT DISTINCT name, items.desc FROM items WHERE name REGEXP '^${name}'`
   }
 
   pool.query(queryString,

@@ -6,7 +6,7 @@ import * as Actions from './Actions'
 
 function* fetchSearchData(action) {
 
-  const searchData = yield call(Client.search, action.payload.firstName);
+  const searchData = yield call(Client.search, action.payload.name);
   const result = yield put(Actions.changeSearchData(searchData));
   console.log("getSearchData");
 

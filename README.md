@@ -211,7 +211,7 @@ npm run server
 Then, submit a query to your db - from another terminal window:
 
 ```
-curl localhost:3001/api/books?firstName=William | jq '.'
+curl localhost:3001/api/books?name=William | jq '.'
 ```
 
 You should see
@@ -223,7 +223,7 @@ You should see
 [
   {
     "last_name": "Shakespeare",
-    "first_name": "William",
+    "name": "William",
     "middle_name": null
   }
 ]
@@ -255,7 +255,7 @@ The main function in this file doing the query is
 
 ```
     function search(query) {
-      return fetch(`/api/books?firstName=${query}`, {
+      return fetch(`/api/books?name=${query}`, {
         accept: 'application/json',
       }).then(checkStatus)
         .then(parseJSON);
