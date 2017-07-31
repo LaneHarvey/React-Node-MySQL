@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const host = "localhost"
 const user = "root"
-const pswd = ""
+const pswd = "password"
 const dbname = "books"
 
 // config db ====================================
